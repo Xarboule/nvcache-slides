@@ -1,0 +1,73 @@
+#+startup: beamer
+#+LaTeX_CLASS: beamer
+#+LaTeX_CLASS_OPTIONS: [presentation]
+#+BEAMER_FRAME_LEVEL: 2
+#+BEAMER_THEME: 
+#+BEAMER_FONT_THEME: structurebold
+#+BEAMER_ENV:
+#+COLUMNS: %45ITEM %10BEAMER_ENV(Env) %10BEAMER_ACT(Act) %4BEAMER_COL(Col) %8BEAMER_OPT(Opt)
+#+OPTIONS: H:2 toc:nil email:n |:t \n:t
+#+BEAMER_HEADER: \graphicspath{{./IMGs/}}
+#+TITLE: NVcache : A plug-and-play NVMM-based IO booster for legacy systems
+#+AUTHOR: Rémi Dulong, University of Neuchâtel
+
+* Intro
+** What is NVMM?
+    
+*** _*NVMM*_ = /Non-Volatile Main Memory/
+    :PROPERTIES:
+    :BEAMER_env: block
+    :BEAMER_col: 0.6
+    :END:
+- Persistent (as an SSD)
+- Fast (as RAM)
+
+*** 
+    :PROPERTIES:
+    :BEAMER_env: block
+    :BEAMER_col: 0.4
+    :END:
+
+  #+ATTR_LATEX: width=\textwidth
+  [[./IMGs/optane-module.jpg]]
+
+  /512 GB of *Intel Optane DCPMM*/
+
+
+
+** Intel Optane DCPMM performances
+
+***** 4KB random writes :
+
+
+
+|           | [[color:red][DDR4 DRAM]] | [[color:orange][Intel Optane]] | [[color:olive][SSD]] | [[color:brown][HDD]] |
+|-----------+-----------+--------------+-----+-----|
+| Bandwidth |           |              |     |     |
+| Latency   |           |              |     |     |
+| Capacity  |           |              |     |     |
+| Price/GB  |           |              |     |     |
+
+  
+* The End
+** End
+Any questions?
+  
+** TEST
+*** First Column
+    :PROPERTIES:
+    :BEAMER_env: block
+    :BEAMER_col: 0.6
+    :END:
+- Test
+- Hello
+*** second column
+    :PROPERTIES:
+    :BEAMER_env: block
+    :BEAMER_col: 0.4
+    :END:      
+
+    #+ATTR_LATEX: width=\textwidth
+    [[./IMGs/test.jpg]]
+
+
