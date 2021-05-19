@@ -39,7 +39,7 @@
 
 
 ** Intel Optane DCPMM performances
-*** \SI{4}{\kilo\byte} random writes :
+*** \SI{4}{\kilo\byte} direct random writes :
 
 \addtocounter{footnote}{-1}
 \fontsize{10pt}{12pt}\selectfont
@@ -63,35 +63,99 @@
    - Add a feature in your existing software
 
 2. Use a *DAX* (Direct Access) file system
-   - Move your log files or your entire Database in NVM
+   - Move your log files or your entire Database in NVM \pause
 
+3. Something else?
     
 *  NVCache
 
 ** The idea of NVCache
 
-  #+ATTR_LATEX: width=\textwidth
-  [[./IMGs/optane-module.jpg]]
-  
-* The End
-** End
-Any questions?
-  
-** TEST
-*** First Column
+*** We want :
+    :PROPERTIES:
+    :BEAMER_env: block
+    :BEAMER_col: 0.4
+    :END:
+
+- Crash resilience\pause
+
+- Performance\pause
+
+- Legacy softwares support\pause
+
+
+*** \Rightarrow Persistent Write cache
     :PROPERTIES:
     :BEAMER_env: block
     :BEAMER_col: 0.6
     :END:
-- Test
-- Hello
-*** second column
+    - Durable linearizability
+      
+** Implementation
+
+*** Execution
+    :PROPERTIES:
+    :BEAMER_env: block
+    :BEAMER_col: 0.6
+    :END:
+- A fork of the musl libc
+- Modifications of [[color:olive][/read()/]], [[color:red][/write()/]], [[color:orange][/fsync()/]], etc...
+- Replaces the system libc in Alpine Docker containers
+
+*** 
     :PROPERTIES:
     :BEAMER_env: block
     :BEAMER_col: 0.4
-    :END:      
+    :END:
+  #+ATTR_LATEX: width=\textwidth
+  [[./IMGs/musl-logo.png]]
+
+  #+ATTR_LATEX: width=\textwidth
+  [[./IMGs/alpine-logo.png]]
+
+  #+ATTR_LATEX: width=\textwidth
+  [[./IMGs/docker-logo.png]]
+
+  
+** Architecture
+  #+ATTR_LATEX: width=\textwidth
+  [[./IMGs/nvcache-model.pdf]]
+
+
+** Performances
+
+*** What are we comparing with?\pause
+
+- The [[color:blue][SSD]] (ext4)\pause
+- The Optane NMV module
+  - [[color:olive][Ext4 (DAX)]]
+  - [[color:violet][NOVA]]
+- [[color:orange][dm-writecache]] /(lvm2 implementation)/
+
+
+** Micro benchmarks
+
+  #+ATTR_LATEX: width=\textwidth
+  [[./IMGs/paper-figure1.pdf]]
+
+  #+ATTR_LATEX: width=\textwidth
+  [[./IMGs/paper-figure2.pdf]]
+
+    
+
+** Macro benchmarks
+
+* The End
+** End
+Any questions?
+
+** End
+
+** Micro benchmarks
 
     #+ATTR_LATEX: width=\textwidth
-    [[./IMGs/test.jpg]]
+  [[./IMGs/paper-figure3.pdf]]
 
+  #+ATTR_LATEX: width=\textwidth
+  [[./IMGs/paper-figure4.pdf]]
 
