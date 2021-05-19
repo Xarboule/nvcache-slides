@@ -8,6 +8,9 @@
 #+COLUMNS: %45ITEM %10BEAMER_ENV(Env) %10BEAMER_ACT(Act) %4BEAMER_COL(Col) %8BEAMER_OPT(Opt)
 #+OPTIONS: H:2 toc:nil email:n |:t \n:t
 #+BEAMER_HEADER: \graphicspath{{./IMGs/}}
+#+LaTeX_HEADER: \usepackage[binary-units]{siunitx}
+#+LaTeX_HEADER: \sisetup{per-mode=symbol,detect-all}
+#+LaTeX_HEADER: \makesavenoteenv{tabular}
 #+TITLE: NVcache : A plug-and-play NVMM-based IO booster for legacy systems
 #+AUTHOR: Rémi Dulong, University of Neuchâtel
 
@@ -19,8 +22,8 @@
     :BEAMER_env: block
     :BEAMER_col: 0.6
     :END:
+- Fast & byte addressable (as RAM)
 - Persistent (as an SSD)
-- Fast (as RAM)
 
 *** 
     :PROPERTIES:
@@ -36,18 +39,39 @@
 
 
 ** Intel Optane DCPMM performances
+*** \SI{4}{\kilo\byte} random writes :
 
-***** 4KB random writes :
+\addtocounter{footnote}{-1}
+\fontsize{10pt}{12pt}\selectfont
+#+ATTR_LATEX: :float nil :align l|c|c|c|c
+|                  | [[color:red][DDR4 DRAM]][fn:1]                 | [[color:orange][Intel Optane]][fn:2]              | [[color:olive][SSD]]                            | [[color:brown][HDD]]                             |
+|------------------+---------------------------------+---------------------------------+--------------------------------+---------------------------------|
+| Avg. Bandwidth   | \SI{2.2}{\giga\byte\per\second} | \SI{790}{\mega\byte\per\second} | \SI{90}{\mega\byte\per\second} | \SI{1.5}{\mega\byte\per\second} |
+| Agv. Latency     | \SI{1.4}{\micro\second}         | \SI{5}{\micro\second}           | \SI{45}{\micro\second}         | \SI{4000}{\micro\second}        |
+| Typical capacity | \SI{32}{\giga\byte}             | 128 - \SI{512}{\giga\byte}      | Some TB                        | 4 - 12 TB                       |
+| Price/GB         | 12 - 15 $/GB                    | 4.5 - 13 $/GB                   | 0.2 $/GB                       | 0.1 $/GB                        |
 
+*** Footnotes
 
+[fn:1] With tmpfs
+[fn:2] ext4 (DAX)
 
-|           | [[color:red][DDR4 DRAM]] | [[color:orange][Intel Optane]] | [[color:olive][SSD]] | [[color:brown][HDD]] |
-|-----------+-----------+--------------+-----+-----|
-| Bandwidth |           |              |     |     |
-| Latency   |           |              |     |     |
-| Capacity  |           |              |     |     |
-| Price/GB  |           |              |     |     |
+** How to use NVMM?
 
+1. Use *PMDK* : Persistent Memory Development Kit
+   - Write a new NVM dependant software
+   - Add a feature in your existing software
+
+2. Use a *DAX* (Direct Access) file system
+   - Move your log files or your entire Database in NVM
+
+    
+*  NVCache
+
+** The idea of NVCache
+
+  #+ATTR_LATEX: width=\textwidth
+  [[./IMGs/optane-module.jpg]]
   
 * The End
 ** End
