@@ -306,6 +306,71 @@ Questions?
     
     
 ** End
+\fontsize{5pt}{7pt}
+
+*** 
+**** Rémi Dulong
+    :PROPERTIES:
+    :BEAMER_env: block
+    :BEAMER_col: 0.2
+    :END:
+University of Neuchâtel
+#+ATTR_LATEX: width=\textwidth align=center
+[[./IMGs/remi.jpg]]
+
+    
+**** Rafael Pires
+    :PROPERTIES:
+    :BEAMER_env: block
+    :BEAMER_col: 0.2
+    :END:
+University of Neuchâtel
+#+ATTR_LATEX: width=\textwidth
+    [[./IMGs/rafael.jpg]]
+
+**** Andreia Correia
+    :PROPERTIES:
+    :BEAMER_env: block
+    :BEAMER_col: 0.2
+    :END:
+    University of Neuchâtel
+    
+**** Pedro Ramalhete
+    :PROPERTIES:
+    :BEAMER_env: block
+    :BEAMER_col: 0.2
+    :END:
+Cicso systems
+#+ATTR_LATEX: width=\textwidth
+    [[./IMGs/pedro.jpg]]
+
+*** 
+**** Pascal Felber
+    :PROPERTIES:
+    :BEAMER_env: block
+    :BEAMER_col: 0.2
+    :END:
+University of Neuchâtel
+#+ATTR_LATEX: width=\textwidth
+    [[./IMGs/pascal.jpg]]
+
+**** Gaël Thomas
+    :PROPERTIES:
+    :BEAMER_env: block
+    :BEAMER_col: 0.2
+    :END:
+Télécom SudParis
+#+ATTR_LATEX: width=\textwidth
+    [[./IMGs/gael.jpg]]
+
+**** Valerio Schiavoni
+    :PROPERTIES:
+    :BEAMER_env: block
+    :BEAMER_col: 0.2
+    :END:
+University of Neuchâtel
+#+ATTR_LATEX: width=\textwidth
+    [[./IMGs/valerio.jpg]]
 
 ** Micro benchmarks
 
