@@ -372,6 +372,7 @@ University of Neuchâtel
 #+ATTR_LATEX: width=\textwidth
     [[./IMGs/valerio.jpg]]
 
+** End
 ** Micro benchmarks
 
   #+ATTR_LATEX: width=\textwidth
