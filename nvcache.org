@@ -85,6 +85,7 @@
 
 - Legacy softwares support\pause
 
+- Legacy file systems support\pause
 
 *** \Rightarrow Persistent Write cache
     :PROPERTIES:
@@ -128,9 +129,13 @@
 
 
 
-** Code example
+** Page states
+  #+ATTR_LATEX: width=\textwidth
+  [[./IMGs/pagestates.pdf]]
 
-*** Without NVCache
+  
+** Code example
+*** Without NVCache:
 
 \fontsize{8pt}{10pt}
 #+begin_src C
@@ -156,8 +161,7 @@
 
 ** Code example
 
-*** Without NVCache
-
+*** Without NVCache:
 \fontsize{8pt}{10pt}
 #+begin_src C
 
@@ -182,7 +186,7 @@
 
 ** Code example
 
-*** With NVCache
+*** With NVCache:
 
 \fontsize{8pt}{10pt}
 #+begin_src C
@@ -208,7 +212,7 @@
 
 ** Code example
 
-*** With NVCache
+*** With NVCache:
 
 \fontsize{8pt}{10pt}
 #+begin_src C
@@ -305,7 +309,7 @@ Questions?
 
 ** Micro benchmarks
 
-    #+ATTR_LATEX: width=\textwidth
+  #+ATTR_LATEX: width=\textwidth
   [[./IMGs/paper-figure3.pdf]]
 
   #+ATTR_LATEX: width=\textwidth
