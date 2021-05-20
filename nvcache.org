@@ -10,7 +10,6 @@
 #+BEAMER_HEADER: \graphicspath{{./IMGs/}}
 #+LaTeX_HEADER: \usepackage[binary-units]{siunitx}
 #+LaTeX_HEADER: \sisetup{per-mode=symbol,detect-all}
-#+LaTeX_HEADER: \makesavenoteenv{tabular}
 #+TITLE: NVcache : A plug-and-play NVMM-based IO booster for legacy systems
 #+AUTHOR: Rémi Dulong, University of Neuchâtel
 
@@ -60,12 +59,15 @@
 
 1. Use *PMDK* : Persistent Memory Development Kit
    - Write a new NVM dependant software
-   - Add a feature in your existing software
+   - Add a feature in your existing software \pause
 
 2. Use a *DAX* (Direct Access) file system
    - Move your log files or your entire Database in NVM \pause
 
-3. Something else?
+3. Mmap ~/dev/dax1.0~ ? \pause
+
+4. Something else?
+
     
 *  NVCache
 
@@ -74,7 +76,7 @@
 *** We want :
     :PROPERTIES:
     :BEAMER_env: block
-    :BEAMER_col: 0.4
+    :BEAMER_col: 0.5
     :END:
 
 - Crash resilience\pause
@@ -87,10 +89,11 @@
 *** \Rightarrow Persistent Write cache
     :PROPERTIES:
     :BEAMER_env: block
-    :BEAMER_col: 0.6
+    :BEAMER_col: 0.5
     :END:
     - Durable linearizability
       
+
 ** Implementation
 
 *** Execution
@@ -116,12 +119,120 @@
   #+ATTR_LATEX: width=\textwidth
   [[./IMGs/docker-logo.png]]
 
-  
+
 ** Architecture
+
+*** 
   #+ATTR_LATEX: width=\textwidth
   [[./IMGs/nvcache-model.pdf]]
 
 
+
+** Code example
+
+*** Without NVCache
+
+\fontsize{8pt}{10pt}
+#+begin_src C
+
+  #include<stdlib.h>
+  #include<unistd.h>
+  #include<fcntl.h>
+
+  int main(){
+
+    char *strs[7] = {"a", "b", "c", "d", "e", "f", "g"};
+    int fd = open("testfile", O_CREAT|O_RDWR);
+
+    for(int i=0; i<7; i++){
+      write(fd, strs[i], 1);
+    }
+    fsync(fd);
+    // =========> Persistence guarantee
+    close(fd);
+  }
+
+#+end_src
+
+** Code example
+
+*** Without NVCache
+
+\fontsize{8pt}{10pt}
+#+begin_src C
+
+  #include<stdlib.h>
+  #include<unistd.h>
+  #include<fcntl.h>
+
+  int main(){
+
+    char *strs[7] = {"a", "b", "c", "d", "e", "f", "g"};
+    int fd = open("testfile", O_CREAT|O_RDWR);
+
+    for(int i=0; i<7; i++){
+      write(fd, strs[i], 1); // Crash?
+    }
+    fsync(fd);
+    // =========> Persistence guarantee
+    close(fd);
+  }
+
+#+end_src
+
+** Code example
+
+*** With NVCache
+
+\fontsize{8pt}{10pt}
+#+begin_src C
+
+  #include<stdlib.h>
+  #include<unistd.h>
+  #include<fcntl.h>
+
+  int main(){
+
+    char *strs[7] = {"a", "b", "c", "d", "e", "f", "g"};
+    int fd = open("testfile", O_CREAT|O_RDWR);
+
+    for(int i=0; i<7; i++){
+      write(fd, strs[i], 1);
+    // ========================> Persistence guarantee
+    }
+    fsync(fd); // Does nothing
+    close(fd); // Flushes NVM => Disk
+  }
+
+#+end_src
+
+** Code example
+
+*** With NVCache
+
+\fontsize{8pt}{10pt}
+#+begin_src C
+
+  #include<stdlib.h>
+  #include<unistd.h>
+  #include<fcntl.h>
+
+  int main(){
+
+    char *strs[7] = {"a", "b", "c", "d", "e", "f", "g"};
+    int fd = open("testfile", O_CREAT|O_RDWR);
+
+    for(int i=0; i<7; i++){
+      write(fd, strs[i], 1); // Crash?
+    // ========================> Persistence guarantee
+    }
+    fsync(fd); // Does nothing
+    close(fd); // Flushes NVM => Disk
+  }
+
+#+end_src
+
+  
 ** Performances
 
 *** What are we comparing with?\pause
@@ -129,15 +240,16 @@
 - The [[color:blue][SSD]] (ext4)\pause
 - The Optane NMV module
   - [[color:olive][Ext4 (DAX)]]
-  - [[color:violet][NOVA]]
+  - [[color:violet][NOVA]] \pause
 - [[color:orange][dm-writecache]] /(lvm2 implementation)/
 
 
 ** Micro benchmarks
 
+*** \SI{4}{\kibi\byte} random writes
   #+ATTR_LATEX: width=\textwidth
-  [[./IMGs/paper-figure1.pdf]]
-
+  [[./IMGs/paper-figure1.pdf]] \pause
+  
   #+ATTR_LATEX: width=\textwidth
   [[./IMGs/paper-figure2.pdf]]
 
@@ -145,10 +257,50 @@
 
 ** Macro benchmarks
 
-* The End
-** End
-Any questions?
+*** 
+  #+ATTR_LATEX: width=\textwidth
+  [[./IMGs/paper-figure0.pdf]]
 
+
+* The End
+
+** NVCache: Conclusion
+
+*** We managed to:
+    :PROPERTIES:
+    :BEAMER_env: block
+    :BEAMER_col: 0.6
+    :END:
+- Add new guarantees
+- Keep good performances
+- Exceed the limited NVM capacity
+
+*** \Rightarrow Less than 3000 lines of code
+    :PROPERTIES:
+    :BEAMER_env: block
+    :BEAMER_col: 0.4
+    :END:
+    
+** Thank you for your attention!
+
+*** 
+    :PROPERTIES:
+    :BEAMER_env: block
+    :BEAMER_col: 0.4
+    :END:
+Questions?
+
+
+*** 
+    :PROPERTIES:
+    :BEAMER_env: block
+    :BEAMER_col: 0.6
+    :END:
+  #+ATTR_LATEX: width=\textwidth
+  [[./IMGs/paper.jpg]]
+
+    
+    
 ** End
 
 ** Micro benchmarks
