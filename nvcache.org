@@ -92,7 +92,6 @@
     :BEAMER_env: block
     :BEAMER_col: 0.5
     :END:
-    - Durable linearizability
       
 
 ** Implementation
