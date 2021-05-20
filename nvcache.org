@@ -304,7 +304,7 @@ Questions?
 
     
     
-** End
+** Authors
 \fontsize{5pt}{7pt}
 
 *** 
@@ -316,8 +316,7 @@ Questions?
 University of Neuchâtel
 #+ATTR_LATEX: width=\textwidth align=center
 [[./IMGs/remi.jpg]]
-
-    
+  
 **** Rafael Pires
     :PROPERTIES:
     :BEAMER_env: block
@@ -333,14 +332,15 @@ University of Neuchâtel
     :BEAMER_col: 0.2
     :END:
     University of Neuchâtel
-    
+    #+ATTR_LATEX: width=\textwidth
+    [[./IMGs/andreia.jpg]]    
 **** Pedro Ramalhete
     :PROPERTIES:
     :BEAMER_env: block
     :BEAMER_col: 0.2
     :END:
-Cicso systems
-#+ATTR_LATEX: width=\textwidth
+    Cicso systems
+    #+ATTR_LATEX: width=\textwidth
     [[./IMGs/pedro.jpg]]
 
 *** 
