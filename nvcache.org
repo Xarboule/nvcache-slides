@@ -10,6 +10,7 @@
 #+BEAMER_HEADER: \graphicspath{{./IMGs/}}
 #+LaTeX_HEADER: \usepackage[binary-units]{siunitx}
 #+LaTeX_HEADER: \sisetup{per-mode=symbol,detect-all}
+#+LaTeX_HEADER: \setbeamertemplate{footline}[frame number]
 #+TITLE: NVcache : A plug-and-play NVMM-based IO booster for legacy systems
 #+AUTHOR: Rémi Dulong, University of Neuchâtel
 
@@ -372,7 +373,7 @@ University of Neuchâtel
     [[./IMGs/valerio.jpg]]
 
 ** End
-** Micro benchmarks
+** Backup: Micro benchmarks
 
   #+ATTR_LATEX: width=\textwidth
   [[./IMGs/paper-figure3.pdf]]
