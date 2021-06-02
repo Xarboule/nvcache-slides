@@ -6,13 +6,17 @@
 #+BEAMER_FONT_THEME: structurebold
 #+BEAMER_ENV:
 #+COLUMNS: %45ITEM %10BEAMER_ENV(Env) %10BEAMER_ACT(Act) %4BEAMER_COL(Col) %8BEAMER_OPT(Opt)
-#+OPTIONS: H:2 toc:nil email:n |:t \n:t
+#+OPTIONS: H:2 toc:nil |:t \n:t
 #+BEAMER_HEADER: \graphicspath{{./IMGs/}}
 #+LaTeX_HEADER: \usepackage[binary-units]{siunitx}
 #+LaTeX_HEADER: \sisetup{per-mode=symbol,detect-all}
 #+LaTeX_HEADER: \setbeamertemplate{footline}[frame number]
-#+TITLE: NVcache : A plug-and-play NVMM-based IO booster for legacy systems
-#+AUTHOR: Rémi Dulong, University of Neuchâtel
+#+OPTIONS: author:nil
+#+LaTeX_HEADER: \author[shortname]{Rémi Dulong \textsuperscript{1} \and Rafael Pires \inst{2} \and Andreia Correia \inst{1} \\ \and Valerio Schiavoni \inst{1} \and Pedro Ramalhete \inst{3} \and Pascal Felber \inst{1} \and Gaël Thomas \inst{4} \vspace{7mm}}
+#+LaTeX_HEADER: \institute[shortinst]{\textsuperscript{1}University of Neuchâtel, Switzerland \and \vspace{-3mm} \inst{2} Swiss Federal Institute of Technology in Lausanne, Switzerland \and \vspace{-3mm} \inst{3} Cisco Systems \and \vspace{-3mm} \inst{4} Telecom SudParis/Institut Polytechnique de Paris \and \vspace{5mm} 51st Annual IEEE/IFIP International Conference on Dependable Systems and Networks(DSN 2021) \vspace{-4mm}}
+#+TITLE: NVCache : A plug-and-play NVMM-based IO booster for legacy systems
+#+DATE: Tuesday, June 22nd
+
 
 * Intro
 ** What is NVMM?
@@ -58,12 +62,9 @@
 
 ** How to use NVMM?
 
-1. Use *PMDK* : Persistent Memory Development Kit
-   - Write a new NVM dependant software
-   - Add a feature in your existing software \pause
+1. Use *PMDK* : Persistent Memory Development Kit\pause
 
-2. Use a *DAX* (Direct Access) file system
-   - Move your log files or your entire Database in NVM \pause
+2. Use a *DAX* (Direct Access) file system\pause
 
 3. Mmap ~/dev/dax1.0~ ? \pause
 
@@ -127,12 +128,6 @@
   #+ATTR_LATEX: width=\textwidth
   [[./IMGs/nvcache-model.pdf]]
 
-
-
-** Page states
-  #+ATTR_LATEX: width=\textwidth
-  [[./IMGs/pagestates.pdf]]
-
   
 ** Code example
 *** Without NVCache:
@@ -237,18 +232,7 @@
 #+end_src
 
   
-** Performances
-
-*** What are we comparing with?\pause
-
-- The [[color:blue][SSD]] (ext4)\pause
-- The Optane NMV module
-  - [[color:olive][Ext4 (DAX)]]
-  - [[color:violet][NOVA]] \pause
-- [[color:orange][dm-writecache]] /(lvm2 implementation)/
-
-
-** Micro benchmarks
+** Benchmarks
 
 *** \SI{4}{\kibi\byte} random writes
   #+ATTR_LATEX: width=\textwidth
@@ -256,14 +240,6 @@
   
   #+ATTR_LATEX: width=\textwidth
   [[./IMGs/paper-figure2.pdf]]
-
-    
-
-** Macro benchmarks
-
-*** 
-  #+ATTR_LATEX: width=\textwidth
-  [[./IMGs/paper-figure0.pdf]]
 
 
 * The End
@@ -373,11 +349,5 @@ University of Neuchâtel
     [[./IMGs/valerio.jpg]]
 
 ** End
-** Backup: Micro benchmarks
 
-  #+ATTR_LATEX: width=\textwidth
-  [[./IMGs/paper-figure3.pdf]]
-
-  #+ATTR_LATEX: width=\textwidth
-  [[./IMGs/paper-figure4.pdf]]
-
+_/Contact :/_ Rémi Dulong, remi.dulong@unine.ch
